@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://dim7rlsujvt14"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_a4tt5"]
+[ext_resource type="PackedScene" uid="uid://dsv3nrjl0fb81" path="res://track.tscn" id="1_ab2oj"]
+[ext_resource type="PackedScene" uid="uid://bs756nq6mro5u" path="res://player_car.tscn" id="2_u8w67"]
+[ext_resource type="PackedScene" uid="uid://d2hc7hhhayqab" path="res://hud.tscn" id="3_ddnii"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_31cn0"]
+
+[sub_resource type="Sky" id="Sky_55k1s"]
+sky_material = SubResource("PhysicalSkyMaterial_31cn0")
+
+[sub_resource type="Environment" id="Environment_fosi8"]
+background_mode = 2
+sky = SubResource("Sky_55k1s")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_a4tt5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fosi8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Track" parent="World" instance=ExtResource("1_ab2oj")]
+
+[node name="PlayerCar" parent="World" instance=ExtResource("2_u8w67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+braking_force = 100.0
+turn_speed = 4.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("3_ddnii")]

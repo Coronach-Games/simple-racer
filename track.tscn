@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://dsv3nrjl0fb81"]
+
+[ext_resource type="Script" path="res://track.gd" id="1_8kga7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cg4xh"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2xkp"]
+albedo_color = Color(0.0784314, 0.352941, 0.0941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aooqy"]
+albedo_color = Color(0.362829, 0.362829, 0.362829, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1nvms"]
+size = Vector3(15, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ty8bs"]
+size = Vector3(15, 5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0og2w"]
+transparency = 1
+no_depth_test = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.905269, 2.38247e-06, 1.92523e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvbv5"]
+size = Vector3(15, 5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b07kf"]
+transparency = 1
+no_depth_test = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.0784314, 1, 0.0941176, 1)
+
+[node name="Track" type="Node3D"]
+script = ExtResource("1_8kga7")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_cg4xh")
+surface_material_override/0 = SubResource("StandardMaterial3D_c2xkp")
+
+[node name="Walls" type="CSGCombiner3D" parent="."]
+
+[node name="Wall1" type="CSGBox3D" parent="Walls"]
+material = SubResource("StandardMaterial3D_aooqy")
+
+[node name="StartFinishLine" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartFinishLine"]
+shape = SubResource("BoxShape3D_1nvms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StartFinishLine"]
+mesh = SubResource("BoxMesh_ty8bs")
+surface_material_override/0 = SubResource("StandardMaterial3D_0og2w")
+
+[node name="Checkpoint1" type="Area3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoint1"]
+mesh = SubResource("BoxMesh_rvbv5")
+surface_material_override/0 = SubResource("StandardMaterial3D_b07kf")
+
+[connection signal="body_entered" from="Checkpoint1" to="." method="_on_checkpoint_1_body_entered"]

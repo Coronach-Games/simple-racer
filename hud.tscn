@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2hc7hhhayqab"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_2g772"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_2g772")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_constants/separation = 5
+
+[node name="SpeedDisplay" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabelPrefix" type="Label" parent="VBoxContainer/SpeedDisplay"]
+layout_mode = 2
+text = "Speed:"
+
+[node name="SpeedLabelValue" type="Label" parent="VBoxContainer/SpeedDisplay"]
+layout_mode = 2
+text = "0.00 mph"
+
+[node name="LapDisplay" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="LapLabelPrefix" type="Label" parent="VBoxContainer/LapDisplay"]
+layout_mode = 2
+text = "Lap:"
+
+[node name="LapLabelValue" type="Label" parent="VBoxContainer/LapDisplay"]
+layout_mode = 2
+text = "0/3"
+
+[node name="TimeDisplay" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TimeLabelPrefix" type="Label" parent="VBoxContainer/TimeDisplay"]
+layout_mode = 2
+text = "Time:"
+
+[node name="TimeLabelValue" type="Label" parent="VBoxContainer/TimeDisplay"]
+layout_mode = 2
+text = "00:00.00"
+
+[node name="FPSText" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FPSLabelPrefix" type="Label" parent="VBoxContainer/FPSText"]
+layout_mode = 2
+text = "FPS:"
+
+[node name="FPSLabelValue" type="Label" parent="VBoxContainer/FPSText"]
+layout_mode = 2
+text = "0"
+
+[node name="RaceStateLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
